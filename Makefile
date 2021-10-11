@@ -6,39 +6,37 @@
 #    By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:58:07 by nvasilev          #+#    #+#              #
-#    Updated: 2021/10/11 14:14:37 by nvasilev         ###   ########.fr        #
+#    Updated: 2021/10/11 15:53:16 by nvasilev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROJECT_NAME =	minitalk
-AUTHOR =				Nikita VASILEV
+AUTHOR =		Nikita VASILEV
 
 ################################################################################
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME =		server
-NAME2 =		client
+NAME =			server
+NAME2 =			client
 
 CC =			gcc
-CFLAGS =	-Wall -Wextra -Werror
-AR =			ar
-ARFLAGS =	rcs
+CFLAGS =		-Wall -Wextra -Werror
 RM =			rm -f
 
-RED_COLOR =			\033[0;31m
-RESET_COLOR =		\033[0m
-BLUE_COLOR =		\033[0;36m
+RED_COLOR =		\033[0;31m
+RESET_COLOR =	\033[0m
+BLUE_COLOR =	\033[0;36m
 ORANGE_COLOR =	\033[0;33m
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRC1 =	./srcs/server.c
-SRC2 =	./srcs/client.c
+SRC1 =			./srcs/server.c
+SRC2 =			./srcs/client.c
 
-UTILS =	./utils/ft_putchar_fd.c \
+UTILS =			./utils/ft_putchar_fd.c \
 				./utils/ft_putstr_fd.c \
 				./utils/ft_putnbr_fd.c
 
@@ -46,9 +44,9 @@ UTILS =	./utils/ft_putchar_fd.c \
 #                                     OBJECTS                                  #
 ################################################################################
 
-OBJS_SERVER =	$(SRC1:.c=.o)
-OBJS_CLIENT =	$(SRC2:.c=.o)
-OBJS =				$(UTILS:.c=.o)
+OBJS_SERVER =	$(SRC1:%.c=%.o)
+OBJS_CLIENT =	$(SRC2:%.c=%.o)
+OBJS =			$(UTILS:%.c=%.o)
 
 ################################################################################
 #                                     RULES                                    #
@@ -56,15 +54,14 @@ OBJS =				$(UTILS:.c=.o)
 
 all: header $(NAME) $(NAME2)
 
-.c.o: $(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(OBJS_SERVER)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_SERVER)
-	ranlib $(NAME)
+	$(CC) $(OBJS) $(OBJS_SERVER) -o $@
 
-$(NAME2): $(OBJS) $(OBJS_SERVER)
-	$(AR) $(ARFLAGS) $(NAME2) $(OBJS) $(OBJS_SERVER)
-	ranlib $(NAME2)
+$(NAME2): $(OBJS) $(OBJS_CLIENT)
+	$(CC) $(OBJS) $(OBJS_CLIENT) -o $@
 
 clean:
 	$(RM) $(OBJS) $(OBJS_SERVER) $(OBJS_CLIENT)
