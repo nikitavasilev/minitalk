@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/14 15:53:19 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:00:22 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int	main(int argc, char const *argv[])
 
 	(void)argv;
 	if (argc != 1)
-	{
 		ft_error("Error: Too many arguments");
-		exit(EXIT_FAILURE);
-	}
 	ft_putstr_fd("Server's PID: ", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
