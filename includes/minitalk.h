@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:44:56 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/12 15:03:38 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/10/14 15:53:11 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # include <sys/types.h>
 # include <stdbool.h>
 
-// LIBFT FUNCTIONS
+// UTILS FUNCTIONS
 int		ft_putchar_fd(int c, int fd);
-void	ft_putstr_fd(char *str, int fd);
+void	ft_putstr_fd(const char *str, int fd);
 void	ft_putnbr_fd(int n, int fd);
+void	ft_error(const char *str);
 
 #endif
