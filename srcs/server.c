@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/14 16:00:22 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:43:27 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	signal_handler(int signo, siginfo_t *siginfo, void *ucontext)
 		power = 0;
 		ascii = 0;
 		if (kill(siginfo->si_pid, SIGUSR2) == -1)
-			ft_error("Error signal.");
+			ft_error("ERROR: Signal -> Connection not established.");
 	}
 }
 
@@ -37,7 +37,11 @@ int	main(int argc, char const *argv[])
 
 	(void)argv;
 	if (argc != 1)
-		ft_error("Error: Too many arguments");
+	{
+		ft_putstr_fd("ERROR: Too many arguments.\n", STDOUT_FILENO);
+		ft_error("\nUsage:\n$ ./server");
+	}
+	ft_putstr_fd("\nServer launched.\n", STDOUT_FILENO);
 	ft_putstr_fd("Server's PID: ", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
