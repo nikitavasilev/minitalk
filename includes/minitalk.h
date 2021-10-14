@@ -6,12 +6,13 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:44:56 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/08 18:34:08 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/10/12 15:03:38 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
+# define _XOPEN_SOURCE 700
 
 # include <stdio.h>
 # include <signal.h>
