@@ -6,7 +6,7 @@
 #    By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:58:07 by nvasilev          #+#    #+#              #
-#    Updated: 2021/10/11 16:23:30 by nvasilev         ###   ########.fr        #
+#    Updated: 2021/10/14 15:53:55 by nvasilev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC2 =			./srcs/client.c
 
 UTILS =			./utils/ft_putchar_fd.c \
 				./utils/ft_putstr_fd.c \
-				./utils/ft_putnbr_fd.c
+				./utils/ft_putnbr_fd.c \
+				./utils/ft_error.c
 
 ################################################################################
 #                                     OBJECTS                                  #
