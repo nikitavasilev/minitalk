@@ -54,3 +54,4 @@ dkms.conf
 # Minitalk
 server
 client
+.vscode/
