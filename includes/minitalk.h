@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:44:56 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/14 18:00:55 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/10/19 16:24:42 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <stdbool.h>
+# include "ansi_colors.h"
 
 // UTILS FUNCTIONS
 int		ft_putchar_fd(int c, int fd);
@@ -29,5 +30,6 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_error(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
+void	ft_putstr_color_fd(const char *color, const char *str, int fd);
 
 #endif
