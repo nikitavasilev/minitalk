@@ -6,7 +6,7 @@
 #    By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:58:07 by nvasilev          #+#    #+#              #
-#    Updated: 2021/11/07 17:42:50 by nvasilev         ###   ########.fr        #
+#    Updated: 2021/11/07 22:21:23 by nvasilev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ UTILS =			./utils/ft_putchar_fd.c \
 				./utils/ft_error.c \
 				./utils/ft_isdigit.c \
 				./utils/ft_atoi.c \
-				./utils/ft_putstr_color_fd.c
+				./utils/ft_putstr_color_fd.c \
+				./utils/check_pid_and_null.c
 
 ################################################################################
 #                                     OBJECTS                                  #

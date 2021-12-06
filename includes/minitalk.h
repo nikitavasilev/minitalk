@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:44:56 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/19 16:24:42 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/11/07 22:21:46 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	ft_error(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 void	ft_putstr_color_fd(const char *color, const char *str, int fd);
+void	check_pid_and_null(const char *argv[]);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/11/07 18:09:18 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/11/07 22:28:49 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	display_message(int to_put, siginfo_t *siginfo)
 		if (c == '\0')
 		{
 			ft_putchar_fd('\n', STDOUT_FILENO);
-			usleep(800);
+			usleep(1000);
 			if (kill(siginfo->si_pid, SIGUSR2) == -1)
 				ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 		}
@@ -68,6 +68,7 @@ int	main(int argc, char const *argv[])
 	ft_putstr_fd(RST_CLR, STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	sigemptyset(&action.sa_mask);
+	sigaddset(&action.sa_mask, SIGINT);
 	action.sa_flags = SA_SIGINFO;
 	action.sa_sigaction = signal_handler;
 	if (sigaction(SIGUSR1, &action, NULL) == -1)

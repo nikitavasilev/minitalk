@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 18:27:43 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/11/07 18:01:52 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/11/07 22:31:44 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	cut_bits(pid_t pid, char to_send)
 	while (c < 8)
 	{
 		nb = (to_send >> c++) & 1;
-		usleep(800);
+		usleep(1000);
 		send_sign(pid, nb);
 	}
 }
@@ -51,10 +51,12 @@ static void	cut_str(pid_t pid, const char *str)
 
 static void	signal_handler(int signo)
 {
-	(void)signo;
-	ft_putnbr_fd(g_nb_signals, STDOUT_FILENO);
-	ft_putstr_fd(" bits received.\n", STDOUT_FILENO);
-	exit(EXIT_SUCCESS);
+	if (signo == SIGUSR2)
+	{
+		ft_putnbr_fd(g_nb_signals, STDOUT_FILENO);
+		ft_putstr_fd(" bits received.\n", STDOUT_FILENO);
+		exit(EXIT_SUCCESS);
+	}
 }
 
 int	main(int argc, char const *argv[])
@@ -62,11 +64,13 @@ int	main(int argc, char const *argv[])
 	struct sigaction	action;
 
 	action.sa_handler = signal_handler;
-	sigemptyset(&action.sa_mask);
 	if (sigaction(SIGUSR2, &action, NULL) == -1)
 		ft_error(RED "ERROR: " RST_CLR "Unable to create handler for SIGUSR2.");
 	if (argc == 3)
+	{
+		check_pid_and_null(argv);
 		cut_str(ft_atoi(argv[1]), argv[2]);
+	}
 	else if (argc < 3)
 	{
 		ft_putstr_fd(RED"ERROR: "RST_CLR"Too few arguments.\n", STDOUT_FILENO);
