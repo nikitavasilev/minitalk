@@ -6,7 +6,7 @@
 #    By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:58:07 by nvasilev          #+#    #+#              #
-#    Updated: 2021/11/07 22:21:23 by nvasilev         ###   ########.fr        #
+#    Updated: 2021/12/12 17:19:25 by nvasilev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ RM =			rm -f
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRC1 =			./srcs/server.c
-SRC2 =			./srcs/client.c
+SRC1 =			./srcs//server/server.c
+SRC2 =			./srcs/client/client.c \
+				./srcs/client/check_args.c
 
 UTILS =			./utils/ft_putchar_fd.c \
 				./utils/ft_putstr_fd.c \
@@ -38,7 +39,8 @@ UTILS =			./utils/ft_putchar_fd.c \
 				./utils/ft_isdigit.c \
 				./utils/ft_atoi.c \
 				./utils/ft_putstr_color_fd.c \
-				./utils/check_pid_and_null.c
+				./utils/ft_bzero.c \
+				./utils/ft_strlen.c
 
 ################################################################################
 #                                     OBJECTS                                  #

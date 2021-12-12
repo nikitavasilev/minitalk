@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_pid_and_null.c                               :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 22:20:24 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/11/07 22:20:52 by nvasilev         ###   ########.fr       */
+/*   Created: 2021/12/12 15:41:22 by nvasilev          #+#    #+#             */
+/*   Updated: 2021/12/12 15:41:39 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-void	check_pid_and_null(const char *argv[])
+void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
+	char	*str;
 
+	str = (char *)s;
 	i = 0;
-	if (!argv[1][0])
-		ft_error(RED "ERROR: " RST_CLR "Wrong PID.");
-	while (argv[1][i])
+	while (i < n)
 	{
-		if (!ft_isdigit(argv[1][i++]))
-			ft_error(RED "ERROR: " RST_CLR "Wrong PID.");
+		str[i] = '\0';
+		i++;
 	}
-	if (!argv[2][0])
-		ft_error(RED "ERROR: " RST_CLR "Empty string.");
 }
