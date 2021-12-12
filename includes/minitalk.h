@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:44:56 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/12 17:21:21 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/12/12 18:46:53 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define MINITALK_H
 # define _XOPEN_SOURCE 700
 # define _DEFAULT_SOURCE
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
 
 # include <stdio.h>
 # include <signal.h>

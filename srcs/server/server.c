@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/12 17:46:32 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/12/12 19:03:46 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	clear_buffer(char *buffer, size_t *cursor)
 {
-	if (*cursor == 4094)
-		buffer[4095] = '\0';
+	if (*cursor == BUFFER_SIZE - 2)
+		buffer[BUFFER_SIZE - 1] = '\0';
 	else
 		buffer[*cursor] = '\0';
 	ft_putstr_fd(buffer, STDOUT_FILENO);
@@ -25,7 +25,7 @@ static void	clear_buffer(char *buffer, size_t *cursor)
 
 static void	display_message(int to_put, siginfo_t *siginfo)
 {
-	static char				buffer[4096];
+	static char				buffer[BUFFER_SIZE];
 	static size_t			cursor = 0;
 	static unsigned char	c = 0;
 	static int				i = 0;
@@ -35,7 +35,7 @@ static void	display_message(int to_put, siginfo_t *siginfo)
 	c |= (to_put << i++);
 	if (i > 7)
 	{
-		if (cursor == 4094)
+		if (cursor == BUFFER_SIZE - 2)
 			clear_buffer(buffer, &cursor);
 		if (c == '\0')
 		{
