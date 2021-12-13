@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/12 19:03:46 by nvasilev         ###   ########.fr       */
+/*   Updated: 2021/12/13 05:56:24 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 static void	clear_buffer(char *buffer, size_t *cursor)
 {
-	if (*cursor == BUFFER_SIZE - 2)
-		buffer[BUFFER_SIZE - 1] = '\0';
-	else
-		buffer[*cursor] = '\0';
-	ft_putstr_fd(buffer, STDOUT_FILENO);
-	ft_bzero(buffer, ft_strlen(buffer));
+	write(STDOUT_FILENO, buffer, *cursor);
 	*cursor = 0;
 }
 
@@ -35,8 +30,6 @@ static void	display_message(int to_put, siginfo_t *siginfo)
 	c |= (to_put << i++);
 	if (i > 7)
 	{
-		if (cursor == BUFFER_SIZE - 2)
-			clear_buffer(buffer, &cursor);
 		if (c == '\0')
 		{
 			clear_buffer(buffer, &cursor);
@@ -45,7 +38,11 @@ static void	display_message(int to_put, siginfo_t *siginfo)
 				ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 		}
 		else
+		{
 			buffer[cursor++] = c;
+			if (cursor == BUFFER_SIZE)
+				clear_buffer(buffer, &cursor);
+		}
 		i = 0;
 		c = 0;
 	}
