@@ -6,7 +6,7 @@
 #    By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:58:07 by nvasilev          #+#    #+#              #
-#    Updated: 2021/12/12 17:19:25 by nvasilev         ###   ########.fr        #
+#    Updated: 2021/12/13 05:57:19 by nvasilev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,8 @@ $(NAME): $(OBJS) $(OBJS_SERVER)
 
 $(NAME2): $(OBJS) $(OBJS_CLIENT)
 	$(CC) $(OBJS) $(OBJS_CLIENT) -o $@
+
+bonus: all
 
 clean:
 	$(RM) $(OBJS) $(OBJS_SERVER) $(OBJS_CLIENT)
