@@ -6,27 +6,29 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/13 05:56:24 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:46:31 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minitalk.h"
+#include "minitalk.h"
+#include <signal.h>
+#include <unistd.h>
+#include "ansi_colors.h"
 
 static void	clear_buffer(char *buffer, size_t *cursor)
 {
 	write(STDOUT_FILENO, buffer, *cursor);
+	ft_bzero(buffer, BUFFER_SIZE);
 	*cursor = 0;
 }
 
 static void	display_message(int to_put, siginfo_t *siginfo)
 {
-	static char				buffer[BUFFER_SIZE];
+	static char				buffer[BUFFER_SIZE] = {0};
 	static size_t			cursor = 0;
 	static unsigned char	c = 0;
 	static int				i = 0;
 
-	if (kill(siginfo->si_pid, SIGUSR1) == -1)
-		ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 	c |= (to_put << i++);
 	if (i > 7)
 	{
@@ -46,6 +48,8 @@ static void	display_message(int to_put, siginfo_t *siginfo)
 		i = 0;
 		c = 0;
 	}
+	if (kill(siginfo->si_pid, SIGUSR1) == -1)
+		ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 }
 
 static void	signal_handler(int signo, siginfo_t *siginfo, void *ucontext)
@@ -88,7 +92,7 @@ int	main(int argc, char const *argv[])
 		ft_error(RED "ERROR: " RST_CLR "Unable to create handler for SIGUSR1.");
 	if (sigaction(SIGUSR2, &action, NULL) == -1)
 		ft_error(RED "ERROR: " RST_CLR "Unable to create handler for SIGUSR2.");
-	while (true)
+	while (1)
 		pause();
 	return (0);
 }
