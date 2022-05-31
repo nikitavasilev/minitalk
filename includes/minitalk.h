@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:44:56 by nvasilev          #+#    #+#             */
-/*   Updated: 2022/05/30 05:04:38 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/31 12:59:43 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # endif
 
 # include <sys/types.h>
+
+typedef struct s_fill
+{
+	char			buffer[BUFFER_SIZE];
+	size_t			size;
+	unsigned char	byte;
+}	t_fill;
 
 // CLIENT
 void	check_args(int argc, char const *argv[]);
