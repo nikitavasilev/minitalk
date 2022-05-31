@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 18:27:43 by nvasilev          #+#    #+#             */
-/*   Updated: 2022/05/30 04:45:29 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:34:41 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,31 @@
 
 static int	g_received = -1;
 
-static void	send_sign(pid_t pid, int nb)
+static void	send_sign(pid_t pid, short bit)
 {
-	if (nb == 0)
+	if (bit == 0)
 		if (kill(pid, SIGUSR1) == -1)
 			ft_error(RED "ERROR: " RST_CLR "Connection not established.");
-	if (nb == 1)
+	if (bit == 1)
 		if (kill(pid, SIGUSR2) == -1)
 			ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 }
 
 static void	cut_bits(pid_t pid, char to_send)
 {
-	char	c;
-	int		nb;
+	short	i;
+	short	bit;
 
-	c = 0;
-	while (c < 8)
+	i = 0;
+	while (i < 8)
 	{
-		nb = (to_send >> c++) & 1;
+		bit = (to_send >> i++) & 1;
 		while (1)
 		{
 			if (g_received)
 			{
 				g_received = 0;
-				send_sign(pid, nb);
+				send_sign(pid, bit);
 				break ;
 			}
 		}
@@ -70,8 +70,12 @@ static void	signal_handler(int signo)
 	}
 	else if (signo == SIGUSR2)
 	{
+		nb_signals -= 8;
+		ft_putstr_color_fd(GRN, "\nReceived: ", STDOUT_FILENO);
 		ft_putnbr_fd(nb_signals, STDOUT_FILENO);
-		ft_putstr_fd(" bits received.\n", STDOUT_FILENO);
+		ft_putstr_fd(" bits (", STDOUT_FILENO);
+		ft_putnbr_fd(nb_signals / 8, STDOUT_FILENO);
+		ft_putstr_fd(" bytes)\n", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -81,8 +85,6 @@ int	main(int argc, char const *argv[])
 	struct sigaction	action;
 
 	sigemptyset(&action.sa_mask);
-	sigaddset(&action.sa_mask, SIGUSR1);
-	sigaddset(&action.sa_mask, SIGUSR2);
 	action.sa_flags = 0;
 	action.sa_handler = signal_handler;
 	if (sigaction(SIGUSR1, &action, NULL) == -1)
