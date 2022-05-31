@@ -6,26 +6,26 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 18:27:43 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/12 17:20:15 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:45:29 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minitalk.h"
+#include "minitalk.h"
+#include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "ansi_colors.h"
 
 static int	g_received = -1;
 
 static void	send_sign(pid_t pid, int nb)
 {
-	if (g_received)
-	{
-		g_received = 0;
-		if (nb == 0)
-			if (kill(pid, SIGUSR1) == -1)
-				ft_error(RED "ERROR: " RST_CLR "Connection not established.");
-		if (nb == 1)
-			if (kill(pid, SIGUSR2) == -1)
-				ft_error(RED "ERROR: " RST_CLR "Connection not established.");
-	}
+	if (nb == 0)
+		if (kill(pid, SIGUSR1) == -1)
+			ft_error(RED "ERROR: " RST_CLR "Connection not established.");
+	if (nb == 1)
+		if (kill(pid, SIGUSR2) == -1)
+			ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 }
 
 static void	cut_bits(pid_t pid, char to_send)
@@ -41,6 +41,7 @@ static void	cut_bits(pid_t pid, char to_send)
 		{
 			if (g_received)
 			{
+				g_received = 0;
 				send_sign(pid, nb);
 				break ;
 			}
@@ -79,15 +80,17 @@ int	main(int argc, char const *argv[])
 {
 	struct sigaction	action;
 
-	action.sa_handler = signal_handler;
-	action.sa_flags = SA_RESTART;
 	sigemptyset(&action.sa_mask);
+	sigaddset(&action.sa_mask, SIGUSR1);
+	sigaddset(&action.sa_mask, SIGUSR2);
+	action.sa_flags = 0;
+	action.sa_handler = signal_handler;
 	if (sigaction(SIGUSR1, &action, NULL) == -1)
 		ft_error(RED "ERROR: " RST_CLR "Unable to create handler for SIGUSR1.");
 	if (sigaction(SIGUSR2, &action, NULL) == -1)
 		ft_error(RED "ERROR: " RST_CLR "Unable to create handler for SIGUSR2.");
 	check_args(argc, argv);
-	while (true)
+	while (1)
 		pause();
 	return (0);
 }
