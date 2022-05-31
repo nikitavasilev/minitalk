@@ -6,7 +6,7 @@
 #    By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:58:07 by nvasilev          #+#    #+#              #
-#    Updated: 2021/12/13 05:57:19 by nvasilev         ###   ########.fr        #
+#    Updated: 2022/05/30 04:13:32 by nvasilev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,11 @@ AUTHOR =		Nikita VASILEV
 NAME =			server
 NAME2 =			client
 
-CC =			gcc
-CFLAGS =		-Wall -Wextra -Werror
+CC =			cc
+CFLAGS =		-Wall -Wextra -Werror -g3
 RM =			rm -f
+
+INCLUDES = -I ./includes/
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -48,7 +50,7 @@ UTILS =			./utils/ft_putchar_fd.c \
 
 OBJS_SERVER =	$(SRC1:%.c=%.o)
 OBJS_CLIENT =	$(SRC2:%.c=%.o)
-OBJS =			$(UTILS:%.c=%.o)
+OBJS_UTILS =	$(UTILS:%.c=%.o)
 
 ################################################################################
 #                                     RULES                                    #
@@ -57,18 +59,18 @@ OBJS =			$(UTILS:%.c=%.o)
 all: header $(NAME) $(NAME2)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME): $(OBJS) $(OBJS_SERVER)
-	$(CC) $(OBJS) $(OBJS_SERVER) -o $@
+$(NAME): $(OBJS_UTILS) $(OBJS_SERVER)
+	$(CC) $(OBJS_UTILS) $(OBJS_SERVER) $(INCLUDES) -o $@
 
-$(NAME2): $(OBJS) $(OBJS_CLIENT)
-	$(CC) $(OBJS) $(OBJS_CLIENT) -o $@
+$(NAME2): $(OBJS_UTILS) $(OBJS_CLIENT)
+	$(CC) $(OBJS_UTILS) $(OBJS_CLIENT) $(INCLUDES) -o $@
 
 bonus: all
 
 clean:
-	$(RM) $(OBJS) $(OBJS_SERVER) $(OBJS_CLIENT)
+	$(RM) $(OBJS_UTILS) $(OBJS_SERVER) $(OBJS_CLIENT)
 
 fclean:	clean
 	$(RM) $(NAME) $(NAME2)
