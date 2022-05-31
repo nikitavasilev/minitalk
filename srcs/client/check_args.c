@@ -6,11 +6,13 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 22:20:24 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/12 17:19:12 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:35:20 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minitalk.h"
+#include <unistd.h>
+#include "minitalk.h"
+#include "ansi_colors.h"
 
 static void	check_pid_and_null(const char *argv[])
 {
