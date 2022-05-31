@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:04:16 by nvasilev          #+#    #+#             */
-/*   Updated: 2022/05/30 04:46:31 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:34:31 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,36 @@
 #include <unistd.h>
 #include "ansi_colors.h"
 
-static void	clear_buffer(char *buffer, size_t *cursor)
+static void	clear_buffer(t_fill *fill)
 {
-	write(STDOUT_FILENO, buffer, *cursor);
-	ft_bzero(buffer, BUFFER_SIZE);
-	*cursor = 0;
+	write(STDOUT_FILENO, fill->buffer, fill->size);
+	ft_bzero(fill->buffer, BUFFER_SIZE);
+	fill->size = 0;
 }
 
-static void	display_message(int to_put, siginfo_t *siginfo)
+static void	display_message(int bit, siginfo_t *siginfo)
 {
-	static char				buffer[BUFFER_SIZE] = {0};
-	static size_t			cursor = 0;
-	static unsigned char	c = 0;
-	static int				i = 0;
+	static t_fill	fill;
+	static short	i = 0;
 
-	c |= (to_put << i++);
-	if (i > 7)
+	fill.byte |= (bit << i++);
+	if (i == 8)
 	{
-		if (c == '\0')
+		if (fill.byte == '\0')
 		{
-			clear_buffer(buffer, &cursor);
+			clear_buffer(&fill);
 			ft_putchar_fd('\n', STDOUT_FILENO);
 			if (kill(siginfo->si_pid, SIGUSR2) == -1)
 				ft_error(RED "ERROR: " RST_CLR "Connection not established.");
 		}
 		else
 		{
-			buffer[cursor++] = c;
-			if (cursor == BUFFER_SIZE)
-				clear_buffer(buffer, &cursor);
+			fill.buffer[fill.size++] = fill.byte;
+			if (fill.size == BUFFER_SIZE)
+				clear_buffer(&fill);
 		}
 		i = 0;
-		c = 0;
+		fill.byte = 0;
 	}
 	if (kill(siginfo->si_pid, SIGUSR1) == -1)
 		ft_error(RED "ERROR: " RST_CLR "Connection not established.");
