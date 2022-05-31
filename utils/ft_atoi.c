@@ -6,11 +6,11 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:11:38 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/14 16:15:07 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:18:13 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "minitalk.h"
 
 static char	ft_sizeof_long(void)
 {

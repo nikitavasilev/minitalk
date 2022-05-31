@@ -6,14 +6,14 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:15 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/14 15:54:45 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:15:45 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include <unistd.h>
+#include "minitalk.h"
 
-void	ft_putstr_fd(const char *str, int fd)
+int	ft_putstr_fd(const char *str, int fd)
 {
-	while (*str)
-		ft_putchar_fd(*(str++), fd);
+	return (write(fd, str, ft_strlen(str)));
 }

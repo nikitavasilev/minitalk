@@ -6,11 +6,11 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:24:19 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/08 17:25:11 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:22:20 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "minitalk.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

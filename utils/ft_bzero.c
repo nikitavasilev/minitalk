@@ -6,11 +6,11 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 15:41:22 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/12/12 15:41:39 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:19:49 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include <sys/types.h>
 
 void	ft_bzero(void *s, size_t n)
 {

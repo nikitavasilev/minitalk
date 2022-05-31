@@ -6,11 +6,11 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:05:49 by nvasilev          #+#    #+#             */
-/*   Updated: 2021/10/08 17:24:12 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/05/30 04:21:58 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include <unistd.h>
 
 int	ft_putchar_fd(int c, int fd)
 {
