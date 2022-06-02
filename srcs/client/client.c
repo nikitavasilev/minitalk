@@ -6,7 +6,7 @@
 /*   By: nvasilev <nvasilev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 18:27:43 by nvasilev          #+#    #+#             */
-/*   Updated: 2022/05/31 13:34:41 by nvasilev         ###   ########.fr       */
+/*   Updated: 2022/06/02 05:39:57 by nvasilev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	signal_handler(int signo)
 	}
 	else if (signo == SIGUSR2)
 	{
-		nb_signals -= 8;
+		nb_signals -= 7;
 		ft_putstr_color_fd(GRN, "\nReceived: ", STDOUT_FILENO);
 		ft_putnbr_fd(nb_signals, STDOUT_FILENO);
 		ft_putstr_fd(" bits (", STDOUT_FILENO);
